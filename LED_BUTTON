@@ -1,0 +1,20 @@
+int led = 5; //led를 3번 핀으로 선언
+int sw = 3; // 스위치를 5번 핀으로 선언
+
+void setup()
+{
+  pinMode(led, OUTPUT);
+  pinMode(sw, INPUT_PULLUP); //스위치의 경우 연결된 핀의 모드를 INPUT_PULLUP으로 설정
+}
+
+void loop()
+{
+  if(digitalRead(sw) == LOW) //INPUT_PULLUP(사용시 기본상태 HIGH)을 사용해서 LOW를 입력으로 인식
+  {
+    digitalWrite(led, HIGH); 
+  }
+  else
+  {
+    digitalWrite(led, LOW);
+  }
+}
