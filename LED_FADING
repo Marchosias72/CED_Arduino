@@ -1,45 +1,45 @@
-const int LED = 6;
-const int Button = 2;
+const int LED = 6; // LED 핀 번호 설정
+const int Button = 2; // 버튼 핀 번호 설정
 
-int val = 0 ;
-int old_Val = 0;
-int state = 0;
-int brightness = 128;
-unsigned long starttime = 0;
+int val = 0 ; // val 이름의 변수 선언(초기값 0):지금 상태의 값
+int old_Val = 0; // old_Val 이름의 변수 선언(초기값 0):이전 상태의 값
+int state = 0; // state 이름의 변수 선언(초기값 0)
+int brightness = 128; // brightness 이름의 변수 선언(초기값 0)
+unsigned long starttime = 0; // starttime의 변수 선언(unsigned: 양수만 사용)
 
 void setup(){
-  pinMode(LED, OUTPUT);
-  pinMode(Button, INPUT);
+  pinMode(LED, OUTPUT); // 6번 핀을 출력핀으로 설정
+  pinMode(Button, INPUT); // 2번 핀을 입력핀으로 설정
 
 }
 
 void loop()
 {
-  val = digitalRead(Button);
+  val = digitalRead(Button); // val 변수에 버튼에서 읽어온 디지털 값 저장
 
-  if((val == HIGH)&&(old_Val == LOW))
+  if((val == HIGH)&&(old_Val == LOW)) //val 변수에 디지털 값 = 1(눌림), old_Val 변수에 디지털 값 = 0(안 눌림)
   {
     state = 1 - state;
-    starttime = millis();
+    starttime = millis(); //millis 함수는 아두이노 보드가 프로그램을 돌리기 시작한 후 지난 밀리초(0.001초) 숫자를 반환, 버튼이 눌린 이후 시간 측정
     delay(10);
   }
 
-  if ((val == HIGH)&&(millis() - starttime) > 500){
-    brightness++;
+  if ((val == HIGH)&&(millis() - starttime) > 500){ // 버튼이 눌려있고, 버튼이 0.5초 이상 눌려있으면
+    brightness++; // brightness 값 1씩 증가
     delay(10);
 
-    if(brightness > 255)
+    if(brightness > 255) // brightness 값이 255보다 크면
     {
-      brightness = 0 ;
+      brightness = 0 ; //brightness 값이 0
     }
   }
 
-  old_Val = val;
-  if(state == 1){
-  analogWrite(LED, brightness);
+  old_Val = val; // 지금 상태의 값을 이전 상태의 값으로 변경
+  if(state == 1){ //state 변수 값이 1이면,
+  analogWrite(LED, brightness); //brightness 값(0~255)을 LED로 출력
 
   }
-  else{
-  analogWrite(LED,0);
+  else{ //state 변수 값이 1이 아니면
+  analogWrite(LED,0); //LED 끄기
   }
 }
