@@ -1,0 +1,27 @@
+const int RED = 4; //10번 핀을 LED로 지정, 변수를 지정하지 않고, pinMode함수에 직접 핀 번호를 지정해도 상관없음.
+const int YELLOW = 5;
+const int GREEN = 6;
+
+
+//setup()은 아두이노 시작시 한 번만 실행
+void setup() 
+{
+  pinMode(RED, OUTPUT); //10번 핀을 출력핀으로 설정(LED의 +극)
+  pinMode(YELLOW, OUTPUT);
+  pinMode(GREEN, OUTPUT);
+}
+
+//loop()는 setup()실행 후 계속 반복하는 문장
+void loop() 
+{
+  digitalWrite(GREEN, HIGH); //LED의 출력을 HIGH로 설정
+  delay(4000); // 4초 대기, delay함수의 매개 변수는 ms(밀리 세컨드, 1/1000초)
+  digitalWrite(GREEN, LOW);
+  digitalWrite(YELLOW, HIGH);
+  delay(1500);
+  digitalWrite(YELLOW, LOW);
+  digitalWrite(RED, HIGH);
+  delay(4000);
+  digitalWrite(RED, LOW);
+  delay(1500);
+}
