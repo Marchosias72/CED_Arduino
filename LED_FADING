@@ -1,0 +1,45 @@
+const int LED = 6;
+const int Button = 2;
+
+int val = 0 ;
+int old_Val = 0;
+int state = 0;
+int brightness = 128;
+unsigned long starttime = 0;
+
+void setup(){
+  pinMode(LED, OUTPUT);
+  pinMode(Button, INPUT);
+
+}
+
+void loop()
+{
+  val = digitalRead(Button);
+
+  if((val == HIGH)&&(old_Val == LOW))
+  {
+    state = 1 - state;
+    starttime = millis();
+    delay(10);
+  }
+
+  if ((val == HIGH)&&(millis() - starttime) > 500){
+    brightness++;
+    delay(10);
+
+    if(brightness > 255)
+    {
+      brightness = 0 ;
+    }
+  }
+
+  old_Val = val;
+  if(state == 1){
+  analogWrite(LED, brightness);
+
+  }
+  else{
+  analogWrite(LED,0);
+  }
+}
