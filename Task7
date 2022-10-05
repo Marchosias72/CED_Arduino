@@ -1,0 +1,18 @@
+const int LED = 6; // 6번 핀을 LED용으로 선언
+
+int val = 0;  //정수형 변수 val 선언 초기값 0
+
+void setup()
+{
+ 	pinMode(LED, OUTPUT); // LED 핀을 output으로 설정
+ 	Serial.begin(9600);
+  
+}
+
+void loop()
+{
+ 	val = analogRead(A5); //val 변수에 조도센서의 불러온 뒤 값 저장
+ 	Serial.println(val); // val 값 시리얼 모니터에 출력
+ 	analogWrite(LED, val/20); // LED에 val값을 20으로 나눈 값을 출력(교수님 자료에서는 4로 나누지만, 값의 크기가 너무 큼)
+ 	delay(10);
+}
